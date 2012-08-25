@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sblog</title>
+  <title>SBlog<%= ": #{@page_title}" if @page_title %></title>
   <%= stylesheet_link_tag    "application", "scaffolds", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-
-<%= yield %>
-
+<body class="public">
+	<div id="header">
+	  <h1><%= link_to('SBlog', '/', :style => 'text-decoration: none; color: #FFFFFF;')%></h1>
+	</div>
+	<div id="pagecontent">
+	  <%= "<div class=\"notice\">#{flash[:notice]}</div" if flash[:notice] %>
+	  <%= yield %>
+	</div>
+	
 </body>
 </html>

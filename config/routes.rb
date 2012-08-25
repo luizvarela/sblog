@@ -1,14 +1,25 @@
 Sblog::Application.routes.draw do
+  get "main/index"
+
+  get "main/list"
+
+  get "main/category"
+
+  get "main/archive"
+
+  get "main/view_post"
+
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   resources :posts do
      resources :comentarios   
+      
   end
  
    
-  root :to => "posts#index"
+  root :to => "main#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

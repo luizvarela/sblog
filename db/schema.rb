@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120825191106) do
+ActiveRecord::Schema.define(:version => 20120825223904) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -45,6 +45,20 @@ ActiveRecord::Schema.define(:version => 20120825191106) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
+  create_table "categories", :force => true do |t|
+    t.string "name",        :limit => 50, :default => "", :null => false
+    t.string "short_name",  :limit => 30, :default => "", :null => false
+    t.string "description",               :default => "", :null => false
+  end
+
+  create_table "categories_posts", :force => true do |t|
+    t.integer "category_id", :null => false
+    t.integer "post_id",     :null => false
+  end
+
+  add_index "categories_posts", ["category_id"], :name => "index_categories_posts_on_category_id"
+  add_index "categories_posts", ["post_id"], :name => "index_categories_posts_on_post_id"
+
   create_table "comentarios", :force => true do |t|
     t.string   "autor"
     t.text     "conteudo"
@@ -58,8 +72,10 @@ ActiveRecord::Schema.define(:version => 20120825191106) do
   create_table "posts", :force => true do |t|
     t.string   "titulo"
     t.text     "conteudo"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+    t.string   "author",     :limit => 100, :default => "0", :null => false
+    t.string   "status",     :limit => 20,  :default => "",  :null => false
   end
 
 end
