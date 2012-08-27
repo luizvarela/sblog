@@ -1,2 +1,26 @@
-<h1>Main#index</h1>
 
+<div id="left-column">
+	<div id="posts">
+		<% @posts.each do |post| -%>
+		<div class="post">
+			<div class="title">
+				<%= link_to post.titulo, post %>
+			</div>
+			
+			<div class="byline">
+				<span class="author">by <%=  h(post.author)%></span>
+				<span class="date">on <%= post.created_at.strftime("%B %d,%Y") %></span>
+			</div>
+			<div class="body">
+				<%= h(post.conteudo) %>
+				<%= link_to 'Ver mais', post %>
+			</div>
+			
+		</div>
+		<% end -%>
+	</div>
+</div>
+
+<div id="right-column">
+
+</div>
